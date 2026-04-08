@@ -1,0 +1,27 @@
+{
+  "overview": "NexusAI is a modern AI-themed lead generation website with a dark/deep space color palette, neon accent colors, and heavy animations throughout. Features a glassmorphic header, animated hero slider, About Us with animated stat counters, Partners marquee, Exclusive Offers grid, Why Choose Us with Publisher/Advertiser toggle, and a full-featured footer.",
+  "features": [
+    "Glassmorphism sticky header with scroll shrink animation",
+    "Auto-rotating hero slider with 3 slides, particle background, and typewriter effects",
+    "About Us section with animated stat counters and Lucide icons",
+    "Partners infinite-scroll marquee with hover glow/lift effects",
+    "Exclusive Offers grid with hover animations and badge labels",
+    "Why Choose Us with Publisher/Advertiser toggle tabs",
+    "Dark footer with animated gradient border, social icons, and Back to Top",
+    "Full mobile responsive design",
+    "Scroll-triggered section animations throughout",
+    "Neon glow effects with electric blue, purple, and cyan palette"
+  ],
+  "category": "landing-page",
+  "tags": [
+    "ai",
+    "lead-generation",
+    "landing-page",
+    "animations",
+    "glassmorphism",
+    "dark-theme",
+    "neon",
+    "nexusai"
+  ],
+  "last_updated": "2026-04-08T17:42:01.205Z"
+}

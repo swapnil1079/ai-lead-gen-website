@@ -127,7 +127,7 @@ export default function About() {
                 <div className="text-center">
                   <Brain className="w-16 h-16 text-primary mx-auto mb-2 animate-pulse" />
                   <p className="font-display font-bold text-2xl gradient-neon-text">
-                    NexusAI
+                    Avanto
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
                     Core Engine

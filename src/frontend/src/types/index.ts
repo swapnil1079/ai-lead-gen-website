@@ -21,6 +21,7 @@ export interface Partner {
   tagline: string;
   initials: string;
   colorClass: string;
+  logoSrc?: string;
 }
 
 export interface Offer {

@@ -37,9 +37,9 @@ const SOCIAL = [
 ];
 
 const LEGAL_LINKS = [
-  { label: "Privacy Policy", href: "https://nexusai.com/privacy" },
-  { label: "Terms of Service", href: "https://nexusai.com/terms" },
-  { label: "Cookie Settings", href: "https://nexusai.com/cookies" },
+  { label: "Privacy Policy", href: "https://avanto.com/privacy" },
+  { label: "Terms of Service", href: "https://avanto.com/terms" },
+  { label: "Cookie Settings", href: "https://avanto.com/cookies" },
 ];
 
 export default function Footer() {
@@ -89,13 +89,11 @@ export default function Footer() {
               onClick={() => handleNavClick("#home")}
               className="flex items-center gap-2.5 mb-5 group cursor-pointer"
             >
-              <div className="w-9 h-9 rounded-lg gradient-neon flex items-center justify-center animate-pulse-glow">
-                <Zap className="w-5 h-5 text-background fill-current" />
-              </div>
-              <span className="font-display font-bold text-xl tracking-tight">
-                <span className="text-foreground">Nexus</span>
-                <span className="gradient-neon-text">AI</span>
-              </span>
+              <img
+              src="/assets/images/avanto-logo.png"
+              alt="Avanto logo"
+              className="w-[10.5rem] h-[3.5rem] object-contain"
+            />
             </button>
             <p className="text-muted-foreground text-sm leading-relaxed mb-6">
               Intelligent Lead Generation Powered by AI. Helping 500+ companies
@@ -104,11 +102,11 @@ export default function Footer() {
 
             <div className="space-y-3 text-sm">
               <a
-                href="mailto:hello@nexusai.com"
+                href="mailto:hello@avanto.com"
                 className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
               >
                 <Mail className="w-4 h-4 shrink-0" />
-                hello@nexusai.com
+                hello@avanto.com
               </a>
               <a
                 href="tel:+18005551234"
@@ -225,7 +223,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-border/30 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground text-center md:text-left">
-            © {year} NexusAI. Built with love using{" "}
+            © {year} Avanto. Built with love using{" "}
             <a
               href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(hostname)}`}
               target="_blank"

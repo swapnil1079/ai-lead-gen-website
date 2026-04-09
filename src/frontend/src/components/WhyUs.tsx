@@ -192,7 +192,7 @@ export default function WhyUs() {
                     style={{ animationDelay: "1s" }}
                   />
                   <span className="font-mono text-xs text-muted-foreground">
-                    nexus_ai_engine.running
+                    avanto_engine.running
                   </span>
                 </div>
 

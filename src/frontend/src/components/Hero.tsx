@@ -1,14 +1,6 @@
 "use client";
-import {
-  ArrowRight,
-  BarChart2,
-  ChevronLeft,
-  ChevronRight,
-  Globe,
-  Mail,
-  Target,
-} from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { ArrowRight, BarChart2, Globe, Target } from "lucide-react";
+import { useEffect, useState } from "react";
 import type { HeroSlide } from "../types";
 
 const SLIDES: HeroSlide[] = [
@@ -74,53 +66,14 @@ const ORBS = [
 const ORB_IDS = ["orb-1", "orb-2", "orb-3"];
 
 export default function Hero() {
-  const [current, setCurrent] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [email, setEmail] = useState("");
-  const [emailSubmitted, setEmailSubmitted] = useState(false);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 100);
     return () => clearTimeout(t);
   }, []);
 
-  const goTo = useCallback(
-    (indexOrUpdater: number | ((c: number) => number)) => {
-      setIsAnimating(true);
-      setCurrent(
-        typeof indexOrUpdater === "function"
-          ? indexOrUpdater
-          : () => indexOrUpdater,
-      );
-      setTimeout(() => setIsAnimating(false), 600);
-    },
-    [],
-  );
-
-  const startAutoplay = useCallback(() => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    intervalRef.current = setInterval(() => {
-      goTo((c) => (c + 1) % SLIDES.length);
-    }, 5500);
-  }, [goTo]);
-
-  useEffect(() => {
-    startAutoplay();
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [startAutoplay]);
-
-  const handleSlide = (index: number) => {
-    if (isAnimating) return;
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    goTo(index);
-    startAutoplay();
-  };
-
-  const slide = SLIDES[current];
+  const slide = SLIDES[0];
 
   return (
     <div className="relative min-h-screen flex flex-col overflow-hidden bg-space-deep pt-24">
@@ -170,7 +123,7 @@ export default function Hero() {
 
       {/* Main content */}
       <div className="container mx-auto px-6 flex-1 flex items-center">
-        <div className="grid lg:grid-cols-2 gap-12 items-center w-full py-12">
+        <div className="grid lg:grid-cols-2 gap-12 items-center w-full py-6">
           {/* Left: Text */}
           <div className="space-y-8">
             {/* Badge */}
@@ -184,7 +137,7 @@ export default function Hero() {
 
             {/* Headline */}
             <div
-              className={`space-y-2 transition-all duration-700 ${visible && !isAnimating ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+              className={`space-y-2 transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
               style={{ transitionDelay: "0.2s" }}
             >
               <h1 className="font-display text-5xl md:text-6xl xl:text-7xl font-bold leading-tight text-foreground">
@@ -197,7 +150,7 @@ export default function Hero() {
 
             {/* Description */}
             <p
-              className={`text-lg text-muted-foreground max-w-lg leading-relaxed transition-all duration-700 ${visible && !isAnimating ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+              className={`text-lg text-muted-foreground max-w-lg leading-relaxed transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
               style={{ transitionDelay: "0.35s" }}
             >
               {slide.description}
@@ -205,7 +158,7 @@ export default function Hero() {
 
             {/* CTAs */}
             <div
-              className={`flex flex-wrap gap-4 transition-all duration-700 ${visible && !isAnimating ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+              className={`flex flex-wrap gap-4 transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
               style={{ transitionDelay: "0.5s" }}
             >
               <button
@@ -227,53 +180,6 @@ export default function Hero() {
               )}
             </div>
 
-            {/* Email Lead Capture */}
-            <div
-              className={`transition-all duration-700 ${visible && !isAnimating ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-              style={{ transitionDelay: "0.58s" }}
-            >
-              {emailSubmitted ? (
-                <div
-                  data-ocid="hero-email-success"
-                  className="glassmorphism rounded-xl px-5 py-3.5 inline-flex items-center gap-2 text-sm text-primary font-medium border-neon"
-                >
-                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                  We&apos;ll be in touch — check your inbox!
-                </div>
-              ) : (
-                <form
-                  data-ocid="hero-lead-form"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    if (email.trim()) setEmailSubmitted(true);
-                  }}
-                  className="flex gap-2 max-w-md"
-                >
-                  <div className="relative flex-1">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
-                    <input
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter your work email"
-                      data-ocid="hero-email-input"
-                      className="w-full glassmorphism rounded-lg pl-9 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground border border-border focus:border-primary/60 focus:outline-none focus:ring-1 focus:ring-primary/40 transition-colors duration-200"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    data-ocid="hero-email-submit"
-                    className="neon-button-filled text-background font-semibold px-5 py-3 rounded-lg text-sm whitespace-nowrap cursor-pointer"
-                  >
-                    Get Access
-                  </button>
-                </form>
-              )}
-              <p className="text-xs text-muted-foreground mt-2 ml-0.5">
-                No credit card required &middot; Free trial for 14 days
-              </p>
-            </div>
 
             {/* Stats */}
             <div
@@ -362,46 +268,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Slide Controls */}
-      <div className="container mx-auto px-6 pb-10 flex items-center justify-between">
-        <div className="flex gap-3" data-ocid="hero-slide-indicators">
-          {SLIDES.map((s, i) => (
-            <button
-              key={s.id}
-              type="button"
-              onClick={() => handleSlide(i)}
-              aria-label={`Slide ${i + 1}`}
-              className={`rounded-full transition-all duration-300 cursor-pointer ${
-                i === current
-                  ? "w-8 h-2 bg-primary shadow-neon-primary"
-                  : "w-2 h-2 bg-muted hover:bg-primary/50"
-              }`}
-            />
-          ))}
-        </div>
-        <div className="flex gap-3">
-          <button
-            type="button"
-            data-ocid="hero-prev"
-            onClick={() =>
-              handleSlide((current - 1 + SLIDES.length) % SLIDES.length)
-            }
-            className="neon-button w-10 h-10 rounded-full flex items-center justify-center cursor-pointer"
-            aria-label="Previous slide"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <button
-            type="button"
-            data-ocid="hero-next"
-            onClick={() => handleSlide((current + 1) % SLIDES.length)}
-            className="neon-button w-10 h-10 rounded-full flex items-center justify-center cursor-pointer"
-            aria-label="Next slide"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
     </div>
   );
 }

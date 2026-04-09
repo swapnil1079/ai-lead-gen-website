@@ -7,45 +7,51 @@ import type { Partner } from "../types";
 const PARTNERS: Partner[] = [
   {
     id: 1,
-    name: "Synergy Corp",
-    tagline: "Enterprise sales intelligence",
-    initials: "SC",
+    name: "Outbrain",
+    tagline: "Content recommendation leader",
+    initials: "OB",
     colorClass: "from-primary/30 to-primary/5",
+    logoSrc: "/assets/partners/outbrain.png",
   },
   {
     id: 2,
-    name: "DataSphere",
-    tagline: "Real-time data enrichment",
-    initials: "DS",
+    name: "Facebook",
+    tagline: "Global social advertising",
+    initials: "FB",
     colorClass: "from-secondary/30 to-secondary/5",
+    logoSrc: "/assets/partners/facebook-logo.png",
   },
   {
     id: 3,
-    name: "CloudNova",
-    tagline: "AI infrastructure partner",
-    initials: "CN",
+    name: "EcoSolarDeals",
+    tagline: "Renewable energy offers",
+    initials: "ES",
     colorClass: "from-primary/20 to-secondary/20",
+    logoSrc: "/assets/partners/ecosolardeals.png",
   },
   {
     id: 4,
-    name: "RevFlow",
-    tagline: "Revenue automation platform",
-    initials: "RF",
+    name: "RevContent",
+    tagline: "Performance publishing network",
+    initials: "RC",
     colorClass: "from-secondary/30 to-primary/10",
+    logoSrc: "/assets/partners/revcontent-logo.png",
   },
   {
     id: 5,
-    name: "PipeLogic",
-    tagline: "Pipeline management solutions",
-    initials: "PL",
+    name: "Taboola",
+    tagline: "Discovery ads platform",
+    initials: "TA",
     colorClass: "from-primary/30 to-secondary/10",
+    logoSrc: "/assets/partners/taboola.png",
   },
   {
     id: 6,
-    name: "TechEdge",
-    tagline: "B2B analytics & insights",
-    initials: "TE",
+    name: "WhipDeals",
+    tagline: "Marketplace performance partner",
+    initials: "WD",
     colorClass: "from-secondary/20 to-primary/20",
+    logoSrc: "/assets/partners/whipdeals.png",
   },
 ];
 
@@ -59,18 +65,28 @@ function PartnerCard({
       className="relative glassmorphism rounded-2xl p-6 min-w-[240px] card-hover group cursor-pointer flex-shrink-0"
     >
       <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary/5 to-secondary/5" />
-      <div
-        className={`w-16 h-16 rounded-xl bg-gradient-to-br ${partner.colorClass} border border-primary/20 flex items-center justify-center mb-4`}
-      >
-        <span className="font-display font-bold text-lg text-foreground">
-          {partner.initials}
-        </span>
+      <div className="mb-5 flex items-center justify-center rounded-3xl bg-white p-3 shadow-sm">
+        {partner.logoSrc ? (
+          <img
+            src={partner.logoSrc}
+            alt={`${partner.name} logo`}
+            className="w-24 h-24 object-contain"
+          />
+        ) : (
+          <div
+            className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${partner.colorClass} border border-primary/20 flex items-center justify-center`}
+          >
+            <span className="font-display font-bold text-lg text-foreground">
+              {partner.initials}
+            </span>
+          </div>
+        )}
       </div>
-      <h3 className="font-display font-semibold text-foreground group-hover:text-primary transition-colors duration-200 mb-1">
+      <h3 className="font-display font-semibold text-foreground group-hover:text-primary transition-colors duration-200 mb-1 text-center">
         {partner.name}
       </h3>
-      <p className="text-sm text-muted-foreground mb-4">{partner.tagline}</p>
-      <div className="flex items-center gap-1 text-xs text-primary font-medium">
+      <p className="text-sm text-muted-foreground mb-4 text-center">{partner.tagline}</p>
+      <div className="flex items-center justify-center gap-1 text-xs text-primary font-medium">
         View Partner <ExternalLink className="w-3 h-3" />
       </div>
     </div>
@@ -82,10 +98,10 @@ export default function Partners() {
     threshold: 0.1,
   });
   const scrollRef = useRef<HTMLDivElement>(null);
-  const doubled = PARTNERS.flatMap((p) => [
-    { ...p, instanceId: `${p.id}-a` },
-    { ...p, instanceId: `${p.id}-b` },
-  ]);
+  const partnerList = PARTNERS.map((p) => ({
+    ...p,
+    instanceId: `${p.id}`,
+  }));
 
   return (
     <section className="py-28 bg-space-deep relative overflow-hidden">
@@ -115,7 +131,7 @@ export default function Partners() {
           className="flex gap-6 animate-marquee group-hover:[animation-play-state:paused]"
           style={{ width: "max-content" }}
         >
-          {doubled.map((partner) => (
+          {partnerList.map((partner) => (
             <PartnerCard
               key={partner.instanceId}
               partner={partner}

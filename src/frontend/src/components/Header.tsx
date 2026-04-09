@@ -46,16 +46,14 @@ export default function Header() {
         {/* Logo */}
         <button
           type="button"
-          className="flex items-center gap-2.5 group"
+          className="flex items-center gap-3 group"
           onClick={() => handleNavClick("#home")}
         >
-          <div className="relative w-9 h-9 rounded-lg gradient-neon flex items-center justify-center animate-pulse-glow">
-            <Zap className="w-5 h-5 text-background fill-current" />
-          </div>
-          <span className="font-display font-bold text-xl tracking-tight">
-            <span className="text-foreground">Nexus</span>
-            <span className="gradient-neon-text">AI</span>
-          </span>
+          <img
+            src="/assets/images/avanto-logo.png"
+            alt="Avanto logo"
+            className="w-[10.5rem] h-[3.5rem] object-contain"
+          />
         </button>
 
         {/* Desktop Nav */}

@@ -223,7 +223,8 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-border/30 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground text-center md:text-left">
-            © {year} Avanto. Built with love using{" "}
+            © {year} Avanto. 
+            {/* Built with love using{" "}
             <a
               href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(hostname)}`}
               target="_blank"
@@ -231,7 +232,7 @@ export default function Footer() {
               className="text-primary hover:underline"
             >
               caffeine.ai
-            </a>
+            </a> */}
           </p>
           <div className="flex items-center gap-6">
             {LEGAL_LINKS.map((link) => (
